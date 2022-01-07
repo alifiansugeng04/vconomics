@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const chalk = require('chalk');
 const readlineSync = require('readline-sync');
+const moment = require('moment');
 
 function rndEmail(length) {
     var result = '';
@@ -116,7 +117,7 @@ const functionVerif = (token, otpNum) => new Promise((resolve, reject) => {
     
         // Signup
     
-        const emailRndm = `${rndEmail(10)}@gmailwe.com`; // Change domain here !! only domain https://generator.email/
+        const emailRndm = `${rndEmail(10)}@gmailwe.com`;
         const username = emailRndm.split('@')[0];
         const domain = emailRndm.split('@')[1];
     
@@ -126,22 +127,26 @@ const functionVerif = (token, otpNum) => new Promise((resolve, reject) => {
     
         if (resultSignupStatus == true) {
             const token = resultSignup.data.token;
-    
+            console.log(chalk.greenBright(`[ ${moment().format('hh:mm:ss')} ] Success create ${emailRndm}`));
+            console.log(chalk.greenBright(`[ ${moment().format('hh:mm:ss')} ] Waiting for OTP !`));
             // Check Otp
             do {
                 var otpNum = await getVerifOtp(username, domain);
+                if (otpNum) {
+                    console.log(chalk.greenBright(`[ ${moment().format('hh:mm:ss')} ] OTP Code : ${otpNum}`));
+                }
             } while(!otpNum)
     
             // Verif Signup
             const resultVerif = await functionVerif(token, otpNum);
             if (resultVerif.messageCode == 'VERIFY_OTP_SUCCESS') {
-                console.log(chalk.greenBright('[+] Congrats ! You got 150 MICS'));
+                console.log(chalk.greenBright(`[ ${moment().format('hh:mm:ss')} ] Congrats ! You got 150 MICS\n`));
             } else {
-                console.log(chalk.redBright('[+] Unfortunately , you didnt get anything !'));
+                console.log(chalk.redBright(`[ ${moment().format('hh:mm:ss')} ] Unfortunately , you didnt get anything !\n`));
             }
     
         } else {
-            console.log(chalk.redBright(`[+] ${message}`));
+            console.log(chalk.redBright(`[ ${moment().format('hh:mm:ss')} ] ${message}`));
         }
     }
 
