@@ -8,3 +8,9 @@ How to use :
 4. node index.js
 5. Input refferal code
 6. Done
+
+NOTE :
+
+If you get log INVALID_EMAIL_ADDRESS , just change email's domain on line 119 .. Search another domain from https://generator.email/
+
+Thank you
