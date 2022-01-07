@@ -14,7 +14,38 @@ function rndEmail(length) {
     return result;
 }
 
-const functionSignup = (emailRndm, myReff) => new Promise((resolve, reject) => {
+const name = () => new Promise((resolve, reject) => {
+
+    fetch('https://api.namefake.com/', {
+        headers: {
+            'authority': 'api.namefake.com',
+            'cache-control': 'max-age=0',
+            'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'upgrade-insecure-requests': '1',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            'sec-fetch-site': 'same-site',
+            'sec-fetch-mode': 'navigate',
+            'sec-fetch-user': '?1',
+            'sec-fetch-dest': 'document',
+            'referer': 'https://namefake.com/',
+            'accept-language': 'en-US,en;q=0.9',
+            'cookie': '_ga=GA1.2.1712758969.1641587539; _gid=GA1.2.1378957727.1641587539'
+        }
+    })
+    .then(res => res.text())
+    .then(res => {
+        const names = JSON.parse(res)
+        resolve(names.name)
+    })
+    .catch(err => {
+        reject(err)
+    })
+});
+
+const functionSignup = (emailRndm, myReff, nama) => new Promise((resolve, reject) => {
 
     fetch('https://id.vscore.vn/api-v1/accounts/register/4', {
         method: 'POST',
@@ -31,7 +62,7 @@ const functionSignup = (emailRndm, myReff) => new Promise((resolve, reject) => {
             'Accept-Encoding': 'gzip',
             'User-Agent': 'okhttp/3.12.1'
         },
-        body: JSON.stringify({"userName": emailRndm,"password":"fbr787pp48","rePassword":"fbr787pp48","fromReferralId": myReff,"fullName":"Sean"}) 
+        body: JSON.stringify({"userName": emailRndm,"password":"fbr787pp48","rePassword":"fbr787pp48","fromReferralId": myReff,"fullName": nama}) 
     })
     .then(res => res.json())
     .then(res => {
@@ -121,7 +152,8 @@ const functionVerif = (token, otpNum) => new Promise((resolve, reject) => {
         const username = emailRndm.split('@')[0];
         const domain = emailRndm.split('@')[1];
     
-        const resultSignup = await functionSignup(emailRndm, myReff);
+        const nama = await name();
+        const resultSignup = await functionSignup(emailRndm, myReff, nama);
         const resultSignupStatus = resultSignup.success;
         const message = resultSignup.messageCode;
     
