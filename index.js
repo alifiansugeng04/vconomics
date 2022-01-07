@@ -81,7 +81,6 @@ const functionVerif = (token, otpNum) => new Promise((resolve, reject) => {
             'x-location': '',
             'x-via': '3',
             'x-culture-code': 'EN',
-            'x-timestamp': '1641538382',
             'Content-Type': 'application/json;charset=utf-8',
             'Content-Length': '81',
             'Host': 'id.vscore.vn',
