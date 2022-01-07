@@ -1,6 +1,6 @@
 # Vconomics Refferal Bot
 
-# How to use :
+How to use :
 
 1. git clone https://github.com/dkmpostor/vconomics/
 2. cd vconomics
