@@ -11,6 +11,6 @@ How to use :
 
 NOTE :
 
-If you get log INVALID_EMAIL_ADDRESS , just change email's domain on line 119 .. Search another domain from https://generator.email/
+If you get log INVALID_EMAIL_ADDRESS , just change email's domain on line 151 .. Search another domain from https://generator.email/
 
 Thank you
