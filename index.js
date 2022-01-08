@@ -148,7 +148,7 @@ const functionVerif = (token, otpNum) => new Promise((resolve, reject) => {
     
         // Signup
     
-        const emailRndm = `${rndEmail(10)}@gmailwe.com`; // Change domain here !
+        const emailRndm = `${rndEmail(10)}@gmailtot.com`; // Change domain here !
         const username = emailRndm.split('@')[0];
         const domain = emailRndm.split('@')[1];
     
